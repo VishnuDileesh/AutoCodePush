@@ -1,6 +1,7 @@
 import pyautogui as bot
 import sys
 import time as t
+from config import *
 
 # functions
 
@@ -14,13 +15,14 @@ def move(x, direction):
         bot.press(direction)
 
 
-
 # inputs
 
 projectName = sys.argv[1]
 projectType = sys.argv[2]
 projectNumber = sys.argv[3]
 codepen = sys.argv[4]
+auth = sys.argv[5]
+
 
 # open terminal
 
@@ -180,10 +182,59 @@ bot.write('> ![{}](Screenshot.png)'.format(projectName))
 
 bot.hotkey('ctrl', 's')
 
+wait(1)
+
+# close vs code
+
+bot.hotkey('ctrl', 'q')
+
+# git init
+
+wait(2)
+
+bot.write('git init')
+
+bot.press('enter')
+
+bot.write('git add .')
+
+bot.press('enter')
+
+bot.write('git commit -m "Initial Commit"')
+
+bot.press('enter')
+
+# git create repo
+
+bot.write('gh repo create --public')
+
+bot.press('enter')
+
+wait(60)
+
+if(auth == 'true'):
 
 
+    bot.write(username)
+
+    bot.press('enter')
+
+    wait(2)
+
+    bot.write(password)
+
+    bot.press('enter')
 
 
+wait(5)
+
+bot.write('git remote set-url origin git@github.com:VishnuDileesh/{}.git'.format(projectName))
+
+bot.press('enter')
+
+bot.write('git push -u origin master')
+
+bot.press('enter')
 
 
 
